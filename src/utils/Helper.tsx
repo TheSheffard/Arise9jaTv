@@ -7,7 +7,7 @@ import Link from "next/link";
 interface NewsT {
     news: NewsTypes;
 }
-export const CardA = ({ news }: any) => {
+export const CardA = ({ news }: NewsT) => {
     return (
         <section className="h-fit p-2">
             <div className="relative rounded-md h-[170px] w-full overflow-hidden bg-teal-500">
@@ -23,7 +23,7 @@ export const CardA = ({ news }: any) => {
         </section>
     )
 }
-export const CardB = ({ news }: any) => {
+export const CardB = ({ news }: NewsT) => {
     return (
         <section className="h-fit p-2">
             <div className="relative rounded-md h-[400px] w-full overflow-hidden bg-teal-500">
@@ -42,7 +42,7 @@ export const CardB = ({ news }: any) => {
     )
 }
 
-export const SmallCard = ({ news }: any) => {
+export const SmallCard = ({ news }: NewsT) => {
     return (
         <section className="flex gap-4 items-stretch h-full">
             <p className="font-semibold flex-1 min-w-[80px] self-center">
