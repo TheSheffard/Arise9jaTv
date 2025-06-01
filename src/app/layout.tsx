@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/Components/NavComp/NavComp";
 import { Footer } from "@/Components/Footer";
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,12 +27,23 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        {/* ✅ AdSense meta verification tag */}
+        <meta name="google-adsense-account" content="ca-pub-3272562083445981" />
+        {/* ✅ Google AdSense script */}
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3272562083445981"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Navbar />
         {children}
-        <Footer/>
+        <Footer />
       </body>
     </html>
   );
