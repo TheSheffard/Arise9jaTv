@@ -1,30 +1,29 @@
 'use client'
-
-import { fetchTechnology, NewsTypes } from '@/utils/fetchNews';
+import { fetchHealth, NewsTypes } from '@/utils/fetchNews';
 import { CardC } from '@/utils/Helper'
 import { useEffect, useState } from 'react';
 
-const Technology = () => {
-     const [news, setNews] = useState<NewsTypes[]>([]);
-      const [loading, setLoading] = useState(true);
-    
-      useEffect(() => {
+const Health = () => {
+    const [news, setNews] = useState<NewsTypes[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
         const loadNews = async () => {
-          try {
-            const data = await fetchTechnology();
-            setNews(data);
-          } catch (error) {
-            console.error("Error loading news:", error);
-          } finally {
-            setLoading(false);
-          }
+            try {
+                const data = await fetchHealth();
+                setNews(data);
+            } catch (error) {
+                console.error("Error loading news:", error);
+            } finally {
+                setLoading(false);
+            }
         };
         loadNews();
-      }, []);
-    
-      if (loading) {
+    }, []);
+
+    if (loading) {
         return <div className="px-2 md:px-10 h-fit border-red-500 text-center font-semibold">Loading...</div>;
-      }
+    }
     return (
         <div className="grid gap-5 grid-cols-1 md:grid-cols-2 my-10  px-2 md:px-10">
             {
@@ -36,4 +35,4 @@ const Technology = () => {
     )
 }
 
-export default Technology
+export default Health

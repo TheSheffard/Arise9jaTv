@@ -22,7 +22,7 @@ export const Footer = () => {
                         <h3 className="text-lg font-semibold text-red-500">QuickLinks</h3>
                         <div className="flex items-center flex-wrap gap-4">
                             {NavLinks.map((link, index) => (
-                                <Link key={index} href={link.to} className="hover:text-red-500 duration-300 border-r border-gray-200">{link.name}</Link>
+                                <Link key={index} href={link.to} className="hover:text-red-500  border-gray-200">{link.name}</Link>
                             ))}
                         </div>
                     </div>
@@ -30,7 +30,7 @@ export const Footer = () => {
                     {/* Contact and Policies */}
                     <div className="flex items-center gap-4">
                         <p className="text-lg font-semibold text-red-500">About The Company</p>
-                        <ul className="flex items-center gap-4">
+                        <ul className="flex items-center flex-wrap gap-4">
                             <li><Link href="/contactus" className="hover:text-red-500 duration-300">Contact</Link></li>
                             <li><Link href="/privacy" className="hover:text-red-500 duration-300">Privacy Policy</Link></li>
                             <li><Link href="/termsofuse" className="hover:text-red-500 duration-300">Terms of Use</Link></li>
@@ -42,9 +42,9 @@ export const Footer = () => {
             </div>
 
             {/* Copyright Section */}
-            <div className="text-center mt-8 border-t gap-2 flex  border-gray-700 pt-4 border-dotted text-gray-400 text-sm">
-                <p>Developed by <span className="text-white">Rich dot com</span></p>
+            <div className="text-center mt-8 border-t gap-5 flex  justify-center border-gray-700 pt-4 border-dotted text-white text-sm">
                 <p>Copyright © {new Date().getFullYear()} Arise9ja. All rights reserved.</p>
+                <p>Developed by <span className="text-white">Rich dot com</span></p>
             </div>
         </footer>
     );

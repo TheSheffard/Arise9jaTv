@@ -4,13 +4,15 @@ import { NavLinks } from "./NavFucn";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { FaBars, FaTimes } from "react-icons/fa";
+import Logo from "../../../public/android-chrome-192x192.png"
+import Image from "next/image";
 
 export const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const location = usePathname();
 
   return (
-    <nav className="sticky mb-5 top-0 left-0 w-full  bg-white shadow-md z-50">
+    <nav className="sticky mb-5 top-0 left-0 w-full py-1 bg-white shadow-md z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -18,11 +20,11 @@ export const Navbar = () => {
             href={"/"}
             className="text-2xl flex items-center  gap-2 font-bold"
           >
-            {/* <Image
+            <Image
               src={Logo}
               alt=""
-              className="w-[50px] object-contain rounded-md h-[70px]"
-            /> */}
+              className="w-[70px] object-cover rounded-md  h-[60px]"
+            />
             Arise9ja
           </Link>
 

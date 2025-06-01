@@ -3,7 +3,8 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   images: {
     domains: [
-      'cdn.punchng.com',  // Dominio de tus imágenes
+      "global.ariseplay.com", // Your new image domain
+      "arise9jaserver.vercel.app",
     ],
   },
 };

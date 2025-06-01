@@ -13,8 +13,8 @@ export const NavLinks = [
       to: "/business"
     },
     {
-      name: "Economy",
-      to: "/economy"
+      name: "Health",
+      to: "/health"
     },
     {
       name: "Polities",
