@@ -29,14 +29,16 @@ export default function RootLayout({
     <html lang="en">
       <head>
         {/* ✅ AdSense meta verification tag */}
-        <meta name="google-adsense-account" content="ca-pub-3272562083445981" />
+        <meta name="google-adsense-account" content="ca-pub-2520212230353217" />
         {/* ✅ Google AdSense script */}
         <Script
           async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3272562083445981"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2520212230353217"
           crossOrigin="anonymous"
-          strategy="afterInteractive"
+          strategy="lazyOnload" 
         />
+
+
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
