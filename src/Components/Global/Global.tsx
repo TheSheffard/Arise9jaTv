@@ -1,18 +1,17 @@
 'use client'
-
-import { fetchSport, NewsTypes } from '@/utils/fetchNews';
+import { fetchGlobal, NewsTypes } from '@/utils/fetchNews';
 import { CardC } from '@/utils/Helper'
 import { useEffect, useState } from 'react';
 import { CardCSkeleton } from '../NewsSkeletons';
 
-const Sport = () => {
+const Global = () => {
     const [news, setNews] = useState<NewsTypes[]>([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const loadNews = async () => {
             try {
-                const data = await fetchSport();
+                const data = await fetchGlobal();
                 setNews(data);
             } catch (error) {
                 console.error("Error loading news:", error);
@@ -43,4 +42,4 @@ const Sport = () => {
     )
 }
 
-export default Sport
+export default Global

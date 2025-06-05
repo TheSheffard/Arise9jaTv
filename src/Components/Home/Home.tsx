@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Business, FeaturedStory, Hero, JustIn, MoreNews, QuickLinks, TheLatest, WhatToRead } from "./HomeHelp"
 import { fetchNews, NewsTypes } from "@/utils/fetchNews";
+import { JustInSkeleton, MoreNewsSkeleton } from "../NewsSkeletons";
 
 export const HomeComp = () => {
   const [news, setNews] = useState<NewsTypes[]>([]);
@@ -22,24 +23,31 @@ export const HomeComp = () => {
     loadNews();
   }, []);
 
-  if (loading) {
-    return <div className="px-2 md:px-10 h-fit border-red-500 max-w-[1400px] mx-auto">Loading...</div>;
-  }
-
-  if (!news.length) {
-    return <div className="px-2 md:px-10 h-fit border-red-500 max-w-[1400px] mx-auto">No news found</div>;
-  }
-
   return (
-    <div className="px-2 md:px-10 h-fit border-red-500 max-w-[1400px] mx-auto">
-      <Hero news={news} />
-      <FeaturedStory news={news} />
+    <div className="px-2 md:px-10 h-fit  max-w-[1400px] mx-auto">
+      <Hero news={news} loading={loading} />
+      <FeaturedStory news={news} loading={loading} />
       <QuickLinks />
-      <JustIn news={news[0]} />
+      {loading || !news.length ? (
+        <JustInSkeleton />
+      ) : (
+        <JustIn news={news[0]} />
+      )}
       <Business />
       <WhatToRead />
-      <TheLatest news={news.slice(13, 18)} />
-      <MoreNews news={news.slice(18)} />
+
+      {loading || news.length < 18 ? (
+        <MoreNewsSkeleton />
+      ) : (
+        <TheLatest news={news.slice(13, 18)} />
+      )}
+
+
+      {loading || news.length <= 18 ? (
+        <MoreNewsSkeleton />
+      ) : (
+        <MoreNews news={news.slice(18)} />
+      )}
     </div>
   )
 }

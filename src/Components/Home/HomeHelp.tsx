@@ -7,40 +7,69 @@ import { NavLinks } from "../NavComp/NavFucn";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { fetchBreakingNews, fetchBusinessNews, NewsTypes } from "@/utils/fetchNews";
+import { BusinessCardSkeleton, FeaturedStorySkeleton, HeroCardSkeleton, JustInSkeleton, SmallCardSkeleton, WhatToReadSkeleton } from "../NewsSkeletons";
+import Skeleton from "react-loading-skeleton";
 
 interface MoreNewsProps {
   news: NewsTypes;
+  loading?: boolean;
+
 }
 
 interface NewsT {
   news: NewsTypes[];
+  loading?: boolean;
 }
 
-export const Hero = ({ news }: NewsT) => {
+export const Hero = ({ news, loading }: NewsT) => {
+  if (loading || !news || news.length === 0) {
+    return (
+      <div className="h-fit gap-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-[1.2fr_2fr_1fr]">
+        {/* Left section */}
+        <div className="space-y-4">
+          <HeroCardSkeleton />
+          <HeroCardSkeleton />
+          <HeroCardSkeleton />
+        </div>
+
+        {/* Middle card */}
+        <div>
+          <Skeleton height={400} className="w-full" />
+        </div>
+
+        {/* Right section */}
+        <div>
+          <Skeleton width={100} height={24} />
+          <div className="flex gap-4 flex-col mt-2">
+            {[...Array(6)].map((_, i) => (
+              <SmallCardSkeleton key={i} />
+            ))}
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="h-fit gap-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-[1.2fr_2fr_1fr]">
       {/* Left section */}
       <div>
-        {news && news.length > 0 ? (
-          news?.slice(0, 3).map((item, index) => (
-            <Link href={`/news/${item._id}`} key={index} className="block">
-              <CardA news={item} />
-            </Link>
-          ))
-        ) : (
-          <p>No news available</p>
-        )}
+        {news.slice(0, 3).map((item, index) => (
+          <Link href={`/news/${item._id}`} key={index} className="block">
+            <CardA news={item} />
+          </Link>
+        ))}
       </div>
-      
+
       {/* Middle Card */}
       <div>
-        {news?.slice(4, 5).map((item, index) => (
+        {news.slice(4, 5).map((item, index) => (
           <Link href={`/news/${item._id}`} key={index} className="block">
             <CardB news={item} />
           </Link>
         ))}
       </div>
-      
+
       {/* Right Section */}
       <div>
         <p className="text-teal-700 font-bold text-lg">Most Read</p>
@@ -56,7 +85,11 @@ export const Hero = ({ news }: NewsT) => {
   )
 }
 
-export const FeaturedStory = ({ news }: NewsT) => {
+export const FeaturedStory = ({ news, loading }: NewsT) => {
+  if (loading || !news || news.length === 0) {
+    return <FeaturedStorySkeleton />;
+  }
+
   return (
     <section>
       <p className="font-bold text-lg">Featured Stories</p>
@@ -131,7 +164,17 @@ export const QuickLinks = () => {
   )
 }
 
-export const JustIn = ({ news }: MoreNewsProps) => {
+
+export const JustIn = ({ news, loading }: MoreNewsProps) => {
+  if (loading || !news) {
+    return (
+      <section className="my-10">
+        <Skeleton width={100} height={28} className="my-3" />
+        <JustInSkeleton />
+      </section>
+    )
+  }
+
   return (
     <Link href={`/news/${news._id}`} className="block">
       <section className="my-10">
@@ -174,7 +217,7 @@ export const Business = () => {
   }, []);
 
   if (loading) {
-    return <div className="px-2 md:px-10 h-fit border-red-500 max-w-[1400px] mx-auto">Loading...</div>;
+    return <BusinessCardSkeleton />;
   }
 
   return (
@@ -223,8 +266,8 @@ export const WhatToRead = () => {
     loadNews();
   }, []);
 
-  if (loading) {
-    return <div className="p-3">Loading...</div>;
+ if (loading) {
+    return <WhatToReadSkeleton />;
   }
 
   if (news.length === 0) {

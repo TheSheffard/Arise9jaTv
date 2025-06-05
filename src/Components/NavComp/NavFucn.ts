@@ -5,6 +5,14 @@ export const NavLinks = [
     },
 
     {
+      name: "Global",
+      to: "/global"
+    },
+    {
+      name: "African",
+      to: "/africa"
+    },
+    {
       name: "Technology",
       to: "/technology"
     },

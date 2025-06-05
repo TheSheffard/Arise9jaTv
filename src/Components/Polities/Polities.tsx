@@ -3,6 +3,7 @@
 import { fetchPolities, NewsTypes } from '@/utils/fetchNews';
 import { CardC } from '@/utils/Helper'
 import { useEffect, useState } from 'react';
+import { CardCSkeleton } from '../NewsSkeletons';
 
 const Polities = () => {
     const [news, setNews] = useState<NewsTypes[]>([]);
@@ -23,7 +24,13 @@ const Polities = () => {
     }, []);
 
     if (loading) {
-        return <div className="px-2 md:px-10 h-fit border-red-500 text-center font-semibold">Loading...</div>;
+        return (
+            <div className="grid gap-5 grid-cols-1 md:grid-cols-2 my-10 px-2 md:px-10">
+                {[...Array(4)].map((_, index) => (
+                    <CardCSkeleton key={index} />
+                ))}
+            </div>
+        );
     }
     return (
         <div className="grid gap-5 grid-cols-1 md:grid-cols-2 my-10  px-2 md:px-10">
