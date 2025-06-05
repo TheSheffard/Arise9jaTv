@@ -72,7 +72,7 @@ export const CardC = ({ news }: NewsT) => {
                     <div className="h-[150px] md:h-[250px] flex flex-1 bg-teal-400 relative rounded-md overflow-hidden">
                         <Image
                             alt={news.title}
-                            src={news.imgSrc}
+                            src={news?.imgSrc}
                             fill
                             className="object-cover"
                             sizes="(max-width: 768px) 100vw, 50vw"
