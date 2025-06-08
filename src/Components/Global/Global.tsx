@@ -13,6 +13,7 @@ const Global = () => {
             try {
                 const data = await fetchGlobal();
                 setNews(data);
+
             } catch (error) {
                 console.error("Error loading news:", error);
             } finally {
@@ -20,6 +21,7 @@ const Global = () => {
             }
         };
         loadNews();
+
     }, []);
 
     if (loading) {
@@ -31,6 +33,7 @@ const Global = () => {
             </div>
         );
     }
+
     return (
         <div className="grid gap-5 grid-cols-1 md:grid-cols-2 my-10  px-2 md:px-10">
             {
