@@ -4,11 +4,11 @@ import { CardA, CardB, SmallCard } from "@/utils/Helper";
 import Link from "next/link";
 import "react-loading-skeleton/dist/skeleton.css";
 import { NavLinks } from "../NavComp/NavFucn";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import { fetchBreakingNews, fetchBusinessNews, NewsTypes } from "@/utils/fetchNews";
 import { BusinessCardSkeleton, FeaturedStorySkeleton, HeroCardSkeleton, JustInSkeleton, SmallCardSkeleton, WhatToReadSkeleton } from "../NewsSkeletons";
 import Skeleton from "react-loading-skeleton";
+import { getImageSrc } from "../imageUtils";
 
 interface MoreNewsProps {
   news: NewsTypes;
@@ -92,7 +92,7 @@ export const FeaturedStory = ({ news, loading }: NewsT) => {
 
   return (
     <section>
-      <p className="font-bold text-2xl mt-4 ">Featured Stories</p>
+      <p className="font-bold text-2xl mt-10 ">Featured Stories</p>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4">
         {news.slice(0, 4).map((item, index) => (
           <Link href={`/news/${item._id}`} key={index} className="block">
@@ -113,15 +113,13 @@ export const FeaturedStory = ({ news, loading }: NewsT) => {
 
 export const FeaturedSectionCard = ({ news }: MoreNewsProps) => {
   return (
-    <section className="h-fit p-2 mt-16">
-      <div className="relative rounded-md h-[350px] w-full overflow-hidden bg-teal-500">
-        <Image
+    <section className="h-fit p-2 my-24">
+      <div className=" rounded-md h-[350px] w-full overflow-hidden bg-teal-500">
+        <img
           alt={news.title}
-          src={news.imgSrc}
-          fill
-          sizes="100vw"
-          className="object-cover object-center"
-          priority
+          src={getImageSrc(news?.imgSrc)}
+          className="w-full h-full object-cover"
+
         />
       </div>
       <div className="mt-4 space-y-2">
@@ -137,12 +135,12 @@ export const FeaturedSectionCard = ({ news }: MoreNewsProps) => {
 export const FeaturedSectionCardCardA = ({ news }: MoreNewsProps) => {
   return (
     <section className="h-fit p-2">
-      <div className="rounded-md h-[150px] relative overflow-hidden w-full bg-teal-500">
-        <Image
+      <div className="rounded-md h-[150px]  overflow-hidden w-full bg-teal-500">
+        <img
           alt={news.title}
-          src={news.imgSrc}
-          fill
-          className="object-cover"
+          src={getImageSrc(news?.imgSrc)}
+          className="w-full h-full object-cover"
+
         />
       </div>
       <p className="font-semibold">{news.date}</p>
@@ -180,12 +178,12 @@ export const JustIn = ({ news, loading }: MoreNewsProps) => {
       <section className="my-10">
         <p className="text-xl text-teal-700 my-3 font-bold">Just In</p>
         <section className="block md:flex gap-2 items-center">
-          <div className="h-[200px] md:h-[300px] relative flex flex-1 bg-teal-400 rounded-md overflow-hidden">
-            <Image
-              src={news.imgSrc}
+          <div className="h-[200px] md:h-[300px] flex flex-1 bg-teal-400 rounded-md overflow-hidden">
+            <img
               alt={news.title}
-              fill
-              className="object-cover"
+              src={getImageSrc(news?.imgSrc)}
+              className="w-full h-full object-cover"
+
             />
           </div>
           <div className="flex flex-1 flex-col">
@@ -221,19 +219,18 @@ export const Business = () => {
   }
 
   return (
-    <section className="my-16">
+    <section className="my-24">
       <p className="text-2xl font-bold">Business</p>
       <div className="grid md:grid-cols-2 gap-5 my-2">
         {news?.slice(0, 2).map((item, index) => (
           <Link href={`/news/${item._id}`} key={index} className="block">
             <section className="flex gap-2 items-center">
-              <div className="relative h-[150px] md:h-[150px] flex flex-1 rounded-md overflow-hidden">
-                <Image
-                  src={item.imgSrc}
+              <div className=" h-[150px] md:h-[150px] flex flex-1 rounded-md overflow-hidden">
+                <img
                   alt={item.title || 'Business news image'}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
+                  src={getImageSrc(item.imgSrc)}
+                  className="w-full h-full object-cover"
+
                 />
               </div>
               <div className="flex flex-2 flex-col">
@@ -277,17 +274,15 @@ export const WhatToRead = () => {
   const firstNewsItem = news[0];
 
   return (
-    <section className="block md:flex items-center md:h-[80vh] gap-3 p-3">
+    <section className="block md:flex items-center md:h-[80vh] my-24 gap-3 p-3">
       {/* Left section - Featured news */}
       <Link href={`/news/${firstNewsItem._id}`} className="block w-full h-[500px] md:h-full">
         <div className="bg-amber-500 w-full h-full relative rounded-md overflow-hidden">
-          <Image
+          <img
             alt={firstNewsItem.title || 'Featured news'}
-            src={firstNewsItem.imgSrc}
-            fill
-            className="object-cover"
-            priority
-            sizes="(max-width: 768px) 100vw, 50vw"
+            src={getImageSrc(firstNewsItem?.imgSrc)}
+            className="w-full h-full object-cover"
+
           />
           <div className="bg-black/80 absolute bottom-0 left-0 right-0 p-4 rounded-b-md">
             <p className="font-semibold text-white">{firstNewsItem.date}</p>
@@ -331,12 +326,12 @@ export const MoreNews = ({ news }: NewsT) => {
         {news.map((item, index) => (
           <Link href={`/news/${item._id}`} key={index} className="block">
             <section className="flex gap-2 items-center">
-              <div className="h-[150px] relative md:h-[150px] flex flex-1 rounded-md overflow-hidden">
-                <Image
+              <div className="h-[150px]  md:h-[150px] flex flex-1 rounded-md overflow-hidden">
+                <img
                   alt={item.title}
-                  src={item.imgSrc}
-                  fill
-                  className="object-cover"
+                  src={getImageSrc(item?.imgSrc)}
+                  className="w-full h-full object-cover"
+
                 />
               </div>
               <div className="flex flex-2 flex-col">

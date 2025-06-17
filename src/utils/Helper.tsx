@@ -1,6 +1,5 @@
 'use client'
 
-import Image from "next/image"
 import { NewsTypes } from "./fetchNews";
 import Link from "next/link";
 import { getImageSrc } from "@/Components/imageUtils";
@@ -8,28 +7,12 @@ import { getImageSrc } from "@/Components/imageUtils";
 interface NewsT {
     news: NewsTypes;
 }
-// export const CardA = ({ news }: NewsT) => {
-//     return (
-//         <section className="h-fit p-2">
-//             <div className="relative rounded-md h-[170px] w-full overflow-hidden bg-teal-500">
-//                 <img
-//                     alt={news.title}
-//                     src={news?.imgSrc}
-//                     // fill
 
-
-//                 />
-//             </div>
-//             <p className="font-semibold mt-2">{news.date}</p>
-//             <p className="text-[16px] font-semibold mt-1">{news.title.slice(0, 50)}</p>
-//         </section>
-//     )
-// }
 
 export const CardA = ({ news }: NewsT) => {
     return (
         <section className="h-fit p-2">
-            <div className="relative rounded-md h-[170px] w-full overflow-hidden bg-teal-500">
+            <div className="rounded-md h-[170px] w-full overflow-hidden bg-teal-500">
                 <img
                     alt={news.title}
                     src={getImageSrc(news.imgSrc)}
@@ -44,14 +27,11 @@ export const CardA = ({ news }: NewsT) => {
 export const CardB = ({ news }: NewsT) => {
     return (
         <section className="h-fit p-2">
-            <div className="relative rounded-md h-[400px] w-full overflow-hidden bg-teal-500">
-                <Image
+            <div className=" rounded-md h-[400px] w-full overflow-hidden bg-teal-500">
+                <img
                     alt={news.title}
-                    src={news?.imgSrc}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    className="object-cover"
-                    priority
+                    src={getImageSrc(news?.imgSrc)}
+                    className="w-full h-full object-cover"
                 />
             </div>
             <p className="font-semibold mt-3">{news.date}</p>
@@ -66,14 +46,12 @@ export const SmallCard = ({ news }: NewsT) => {
             <p className="font-semibold flex-1 min-w-[80px] self-center">
                 {news.title.slice(0, 35) + " ...."}
             </p>
-            <div className="relative flex-1 h-full min-h-[100px] w-full rounded-md overflow-hidden bg-teal-400">
-                <Image
+            <div className=" flex-1 h-full min-h-[100px] w-full rounded-md overflow-hidden bg-teal-400">
+                <img
                     alt={news.title}
-                    src={news?.imgSrc}
-                    fill
-                    sizes="(max-width: 768px) 150px, 200px"
-                    className="object-cover"
-                    priority
+                    src={getImageSrc(news?.imgSrc)}
+                    className="w-full h-full object-cover"
+
                 />
             </div>
         </section>
@@ -87,13 +65,12 @@ export const CardC = ({ news }: NewsT) => {
     return (
         <Link href={`/news/${news._id}`} passHref>
             <section className="flex gap-2 items-center p-2">
-                <div className="h-[150px] md:h-[250px] flex flex-1 bg-teal-400 relative rounded-md overflow-hidden">
-                    <Image
+                <div className="h-[150px] md:h-[250px] flex flex-1 bg-teal-400  rounded-md overflow-hidden">
+                    <img
                         alt={news.title}
-                        src={news?.imgSrc}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 768px) 100vw, 50vw"
+                        src={getImageSrc(news?.imgSrc)}
+                        className="w-full h-full object-cover"
+
                     />
                 </div>
                 <div className="flex flex-1 flex-col">

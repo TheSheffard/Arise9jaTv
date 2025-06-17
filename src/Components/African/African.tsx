@@ -10,7 +10,7 @@ const African = () => {
     const [displayCount, setDisplayCount] = useState(20);
 
     const handleLoadMore = () => {
-        setDisplayCount(prevCount => prevCount + 40); // Increase the display count by 40
+        setDisplayCount(prevCount => prevCount + 40); 
     };
 
     useEffect(() => {

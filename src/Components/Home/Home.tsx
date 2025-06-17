@@ -9,6 +9,7 @@ export const HomeComp = () => {
   const [news, setNews] = useState<NewsTypes[]>([]);
   const [loading, setLoading] = useState(true);
 
+
   useEffect(() => {
     const loadNews = async () => {
       try {
@@ -47,6 +48,7 @@ export const HomeComp = () => {
         <MoreNewsSkeleton />
       ) : (
         <MoreNews news={news.slice(18)} />
+
       )}
     </div>
   )
