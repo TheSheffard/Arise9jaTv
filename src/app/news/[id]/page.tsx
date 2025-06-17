@@ -2,7 +2,6 @@
 
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import Image from 'next/image'
 import { StaticImport } from 'next/dist/shared/lib/get-img-props'
 import { getImageSrc } from '@/Components/imageUtils'
 
