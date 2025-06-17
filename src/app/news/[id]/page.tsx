@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { StaticImport } from 'next/dist/shared/lib/get-img-props'
+import { getImageSrc } from '@/Components/imageUtils'
 
 type NewsData = {
   imgSrc: string | StaticImport;
@@ -70,14 +71,11 @@ export default function NewsDetails() {
 
   return (
     <div className="max-w-4xl mx-auto p-4">
-      <div className="relative w-full h-96 mb-6 rounded-lg overflow-hidden">
+      <div className="w-full h-96 mb-6 rounded-lg overflow-hidden">
         <Image
-          src={news.imgSrc}
           alt={news.title}
-          fill
-          className="object-cover"
-          priority
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          src={getImageSrc(news.imgSrc)}
+          className="w-full h-full object-cover"
         />
       </div>
       <h1 className="text-3xl font-bold mb-2">{news.title}</h1>
