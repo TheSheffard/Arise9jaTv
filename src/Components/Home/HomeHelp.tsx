@@ -92,7 +92,7 @@ export const FeaturedStory = ({ news, loading }: NewsT) => {
 
   return (
     <section>
-      <p className="font-bold text-lg">Featured Stories</p>
+      <p className="font-bold text-2xl mt-4 ">Featured Stories</p>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4">
         {news.slice(0, 4).map((item, index) => (
           <Link href={`/news/${item._id}`} key={index} className="block">
@@ -153,7 +153,7 @@ export const FeaturedSectionCardCardA = ({ news }: MoreNewsProps) => {
 
 export const QuickLinks = () => {
   return (
-    <section className="flex items-center my-10 flex-wrap gap-4">
+    <section className="flex items-center my-16 flex-wrap gap-4">
       <p className="font-semibold text-lg">Quick Links:</p>
       {NavLinks.map((el, index) => (
         <Link className="bg-teal-400 px-3 py-[2px] font-semibold rounded-2xl" key={index} href={el.to}>
@@ -266,12 +266,12 @@ export const WhatToRead = () => {
     loadNews();
   }, []);
 
- if (loading) {
+  if (loading) {
     return <WhatToReadSkeleton />;
   }
 
   if (news.length === 0) {
-    return <div className="p-3">No news available</div>;
+    return <div className="p-3"><WhatToReadSkeleton /></div>;
   }
 
   const firstNewsItem = news[0];

@@ -38,7 +38,7 @@ export const fetchBusinessNews = async (): Promise<NewsTypes[]> => {
       throw new Error("Failed to fetch news");
     }
     const data = await response.json();
-    return data.posts; // Assuming the API returns { posts: NewsTypes[] }
+    return data.posts; 
   } catch (error) {
     console.error("Error fetching news:", error);
     return [];

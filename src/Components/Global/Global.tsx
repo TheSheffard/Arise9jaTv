@@ -7,6 +7,11 @@ import { CardCSkeleton } from '../NewsSkeletons';
 const Global = () => {
     const [news, setNews] = useState<NewsTypes[]>([]);
     const [loading, setLoading] = useState(true);
+    const [displayCount, setDisplayCount] = useState(20);
+
+    const handleLoadMore = () => {
+        setDisplayCount(prevCount => prevCount + 40); // Increase the display count by 40
+    };
 
     useEffect(() => {
         const loadNews = async () => {
@@ -35,13 +40,27 @@ const Global = () => {
     }
 
     return (
-        <div className="grid gap-5 grid-cols-1 md:grid-cols-2 my-10  px-2 md:px-10">
-            {
-                news.map((item, index) => (
-                    <CardC news={item} key={index} />
-                ))
-            }
-        </div>
+        <section>
+            <div className="grid gap-5 grid-cols-1 md:grid-cols-2 my-10  px-2 md:px-10">
+                {
+                    news.slice(0, displayCount).map((item, index) => (
+                        <CardC news={item} key={index} />
+                    ))
+                }
+            </div>
+            {/* Load More Button */}
+
+            {news.length > displayCount && (
+                <div className="flex justify-center my-6">
+                    <button
+                        onClick={handleLoadMore}
+                        className="bg-blue-500 text-white px-4 py-3 font-semibold rounded"
+                    >
+                        Load More
+                    </button>
+                </div>
+            )}
+        </section>
     )
 }
 

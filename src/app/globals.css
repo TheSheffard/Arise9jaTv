@@ -1,1 +1,10 @@
 @import "tailwindcss";
+
+
+/* styles/globals.css */
+.adsterra-ad {
+  display: flex;
+  justify-content: center; /* Center the ad */
+  min-height: 100px; /* Prevent layout shift */
+  margin: 1rem 0;
+}

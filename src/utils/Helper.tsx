@@ -3,19 +3,37 @@
 import Image from "next/image"
 import { NewsTypes } from "./fetchNews";
 import Link from "next/link";
+import { getImageSrc } from "@/Components/imageUtils";
 
 interface NewsT {
     news: NewsTypes;
 }
+// export const CardA = ({ news }: NewsT) => {
+//     return (
+//         <section className="h-fit p-2">
+//             <div className="relative rounded-md h-[170px] w-full overflow-hidden bg-teal-500">
+//                 <img
+//                     alt={news.title}
+//                     src={news?.imgSrc}
+//                     // fill
+
+
+//                 />
+//             </div>
+//             <p className="font-semibold mt-2">{news.date}</p>
+//             <p className="text-[16px] font-semibold mt-1">{news.title.slice(0, 50)}</p>
+//         </section>
+//     )
+// }
+
 export const CardA = ({ news }: NewsT) => {
     return (
         <section className="h-fit p-2">
             <div className="relative rounded-md h-[170px] w-full overflow-hidden bg-teal-500">
-                <Image
+                <img
                     alt={news.title}
-                    src={news?.imgSrc}
-                    fill
-
+                    src={getImageSrc(news.imgSrc)}
+                    className="w-full h-full object-cover"
                 />
             </div>
             <p className="font-semibold mt-2">{news.date}</p>
@@ -68,21 +86,21 @@ export const SmallCard = ({ news }: NewsT) => {
 export const CardC = ({ news }: NewsT) => {
     return (
         <Link href={`/news/${news._id}`} passHref>
-                <section className="flex gap-2 items-center p-2">
-                    <div className="h-[150px] md:h-[250px] flex flex-1 bg-teal-400 relative rounded-md overflow-hidden">
-                        <Image
-                            alt={news.title}
-                            src={news?.imgSrc}
-                            fill
-                            className="object-cover"
-                            sizes="(max-width: 768px) 100vw, 50vw"
-                        />
-                    </div>
-                    <div className="flex flex-1 flex-col">
-                        <p className="font-semibold">{news.date}</p>
-                        <p className="md:text-lg font-semibold line-clamp-2">{news.title}</p>
-                    </div>
-                </section>
+            <section className="flex gap-2 items-center p-2">
+                <div className="h-[150px] md:h-[250px] flex flex-1 bg-teal-400 relative rounded-md overflow-hidden">
+                    <Image
+                        alt={news.title}
+                        src={news?.imgSrc}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                </div>
+                <div className="flex flex-1 flex-col">
+                    <p className="font-semibold">{news.date}</p>
+                    <p className="md:text-lg font-semibold line-clamp-2">{news.title}</p>
+                </div>
+            </section>
         </Link>
     )
 }
