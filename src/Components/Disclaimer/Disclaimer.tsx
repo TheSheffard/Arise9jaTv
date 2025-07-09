@@ -21,7 +21,7 @@ const disclaimerItems = [
         content: "This disclaimer is subject to updates and modifications at any time."
     }
 ];
-
+ 
 export const Disclaimer = () => (
     <div className="p-5 bg-gray-100 rounded-lg shadow-md">
         <h1 className="text-2xl font-bold mb-4 text-gray-800">Disclaimer</h1>

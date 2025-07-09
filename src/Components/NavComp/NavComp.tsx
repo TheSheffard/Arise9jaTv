@@ -4,7 +4,7 @@ import { NavLinks } from "./NavFucn";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { FaBars, FaTimes } from "react-icons/fa";
-import Logo from "../../../public/android-chrome-192x192.png"
+import Logo from "../../../public/Arise9jaLogo2.jpg"
 import Image from "next/image";
 
 export const Navbar = () => {
@@ -22,8 +22,8 @@ export const Navbar = () => {
           >
             <Image
               src={Logo}
-              alt=""
-              className="w-[70px] object-cover rounded-md  h-[60px]"
+              alt="Arise9ja"
+              className="w-full object-cover rounded-md  h-[60px]"
             />
             Arise9ja
           </Link>

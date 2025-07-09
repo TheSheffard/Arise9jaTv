@@ -30,6 +30,7 @@ export default function RootLayout({
       <head>
         {/* ✅ AdSense meta verification tag */}
         <meta name="google-adsense-account" content="ca-pub-2520212230353217" />
+        
         {/* ✅ Google AdSense script */}
         <Script
           async

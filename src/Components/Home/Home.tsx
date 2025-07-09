@@ -27,14 +27,18 @@ export const HomeComp = () => {
   return (
     <div className="px-2 md:px-10 h-fit  max-w-[1400px] mx-auto">
       <Hero news={news} loading={loading} />
-      <FeaturedStory news={news} loading={loading} />
+      <FeaturedStory   />
+
       <QuickLinks />
+
       {loading || !news.length ? (
         <JustInSkeleton />
       ) : (
         <JustIn news={news[0]} />
       )}
+
       <Business />
+
       <WhatToRead />
 
       {loading || news.length < 18 ? (

@@ -1,11 +1,10 @@
 'use client'
-
 import { CardA, CardB, SmallCard } from "@/utils/Helper";
 import Link from "next/link";
 import "react-loading-skeleton/dist/skeleton.css";
 import { NavLinks } from "../NavComp/NavFucn";
 import { useEffect, useState } from "react";
-import { fetchBreakingNews, fetchBusinessNews, NewsTypes } from "@/utils/fetchNews";
+import { fetchBreakingNews, fetchBusinessNews, fetchGlobal, NewsTypes } from "@/utils/fetchNews";
 import { BusinessCardSkeleton, FeaturedStorySkeleton, HeroCardSkeleton, JustInSkeleton, SmallCardSkeleton, WhatToReadSkeleton } from "../NewsSkeletons";
 import Skeleton from "react-loading-skeleton";
 import { getImageSrc } from "../imageUtils";
@@ -54,7 +53,7 @@ export const Hero = ({ news, loading }: NewsT) => {
     <div className="h-fit gap-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-[1.2fr_2fr_1fr]">
       {/* Left section */}
       <div>
-        {news.slice(0, 3).map((item, index) => (
+        {news.slice(1, 4).map((item, index) => (
           <Link href={`/news/${item._id}`} key={index} className="block">
             <CardA news={item} />
           </Link>
@@ -85,7 +84,27 @@ export const Hero = ({ news, loading }: NewsT) => {
   )
 }
 
-export const FeaturedStory = ({ news, loading }: NewsT) => {
+export const FeaturedStory = () => {
+
+  const [news, setNews] = useState<NewsTypes[]>()
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const loadNews = async () => {
+      try {
+        const data = await fetchGlobal();
+        setNews(data);
+
+      } catch (error) {
+        console.error("Error loading news:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadNews();
+
+  }, []);
+
   if (loading || !news || news.length === 0) {
     return <FeaturedStorySkeleton />;
   }
@@ -319,11 +338,17 @@ export const TheLatest = ({ news }: NewsT) => {
 }
 
 export const MoreNews = ({ news }: NewsT) => {
+  const [displayCount, setDisplayCount] = useState(20);
+
+  const handleLoadMore = () => {
+    setDisplayCount(prevCount => prevCount + 10);
+  };
+
   return (
     <section className="my-16">
       <p className="text-2xl font-semibold my-6">More News</p>
       <div className="my-2 grid gap-5 grid-cols-1 md:grid-cols-2">
-        {news.map((item, index) => (
+        {news.slice(0, displayCount).map((item, index) => (
           <Link href={`/news/${item._id}`} key={index} className="block">
             <section className="flex gap-2 items-center">
               <div className="h-[150px]  md:h-[150px] flex flex-1 rounded-md overflow-hidden">
@@ -342,6 +367,18 @@ export const MoreNews = ({ news }: NewsT) => {
           </Link>
         ))}
       </div>
+      {/* Load More Button */}
+
+      {news.length > displayCount && (
+        <div className="flex justify-center my-6">
+          <button
+            onClick={handleLoadMore}
+            className="bg-blue-500 text-white px-4 cursor-pointer py-3 font-semibold rounded"
+          >
+            Load More
+          </button>
+        </div>
+      )}
     </section>
   )
 }
